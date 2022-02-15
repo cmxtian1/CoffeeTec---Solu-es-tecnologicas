@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeTec | Tempo Real</title>
+
+    <link rel="stylesheet" href="./Dashboard.css">
+    <link rel="stylesheet" href="./card.css">
+    <link rel="icon" href="../assets/img/icon.png">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="../js/funcoes.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<div class="sidebar">
+    <div class="logo_content">
+        <div class="logo">
+            <i class='bx bxl-codepen'></i>
+            <div class="logo_name">CoffeeTec</div>
+        </div>
+        <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav_list">
+        <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Pesquisa">
+            </a>
+            <span class="tooltip">Pesquisa</span>
+        </li>
+        <li>
+            <a href="./usuario.html">
+                <i class='bx bx-user'></i>
+                <span class="links_name">Funcionários</span>
+            </a>
+            <span class="tooltip">Funcionários</span>
+        </li>
+        <li>
+            <a href="./api-sensor-dht1/graficos.html">
+                <i class='bx bxs-dashboard'></i>
+                <span class="links_name">Dashboard</span>
+            </a>
+            <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+            <a href="">
+                <a href="./cards.html">
+                <i class='bx bx-analyse' ></i>
+                <span class="links_name">Analytics</span>
+            </a>
+            <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+            <a href="https://helpcoffeetec.freshdesk.com">
+                <i class='bx bx-notification' ></i>
+                <span class="links_name">Suporte</span>
+            </a>
+            <span class="tooltip">Suporte</span>
+        </li>
+        <li>
+        <a href="">
+            <i class='bx bx-cog'></i>
+            <span class="links_name">Configurações</span>
+        </a>
+        <span class="tooltip">Configurações</span>
+    </li>
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+                <img src="../img/icon_usuario.png" alt="">
+                <div class="name_job">
+                    <div class="name" id="nome_usuario">Lucas Mastelini</div>
+                    <div class="job" id="nome_funcionario">DEV</div>
+                </div>
+            </div>
+            <i class='bx bx-log-out' id="log_out" onclick="limparSessao()"></i>
+        </div>
+    </div>
+</div>
+
+<body >
+
+    <div class="janela">
+
+        <div class="dash">
+            <div class="regua">
+                <div class="item-regua perigo-frio">
+                    <h4>Perigo</h4>
+                    <h2>0°C</h2>
+                </div>
+                <div class="item-regua alerta-frio">
+                    <h4>Alerta</h4>
+                    <h2>0°C</h2>
+                </div>
+                <div class="item-regua ideal">
+                    <h4>Ideal</h4>
+                    <h2>0°C</h2>
+                </div>
+                <div class="item-regua alerta-quente">
+                    <h4>Alerta</h4>
+                    <h2>0°C</h2>
+                </div>
+                <div class="item-regua perigo-quente">
+                    <h4>Perigo</h4>
+                    <h2>0°C</h2>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h1>Estufa 1</h1>
+                    <div class="temperatura">
+                        <p id="temp_aquario_1">-°C</p>
+                    </div>
+                    <div class="cor-alerta" id="card_1"></div>
+                </div>
+                <div class="card">
+                    <h1>Estufa 2</h1>
+                    <div class="temperatura">
+                        <p id="temp_aquario_2">-°C</p>
+                    </div>
+                    <div class="cor-alerta" id="card_2"></div>
+
+                </div>
+                <div class="card">
+                    <h1>Estufa 3</h1>
+                    <div class="temperatura">
+                        <p id="temp_aquario_3">-°C</p>
+                    </div>
+                    <div class="cor-alerta ideal" id="card_3"></div>
+                </div>
+                <div class="card">
+                    <h1>Estufa 4</h1>
+                    <div class="temperatura">
+                        <p id="temp_aquario_4">-°C</p>
+                    </div>
+                    <div class="cor-alerta" id="card_4"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+
+    function atualizacaoPeriodica() {
+        obterdados(1);
+        obterdados(2);
+        obterdados(3);
+        obterdados(4);
+        setTimeout(atualizacaoPeriodica, 5000);
+    }
+
+    function obterdados(idestufa) {
+        fetch(`/medidas/tempo-real/${idestufa}`)
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    resposta.json().then(resposta => {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                        var dados = {
+                            temperatura: resposta[0].temperatura,
+                        }
+
+                        alertar(resposta[0].temperatura, idestufa);
+                    });
+                } else {
+
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function alertar(temperatura, idestufa) {
+        var limites = {
+            muito_quente: 25,
+            quente: 22,
+            ideal: 20,
+            frio: 10,
+            muito_frio: 5
+        };
+
+        var classe_temperatura = 'cor-alerta';
+
+        if (temperatura >= limites.muito_quente) {
+            classe_temperatura = 'cor-alerta perigo-quente';
+            console.log("caiu no 1")
+        }
+        else if (temperatura < limites.muito_quente && temperatura >= limites.quente) {
+            classe_temperatura = 'cor-alerta alerta-quente';
+            console.log("caiu no 2")
+        }
+        else if (temperatura < limites.quente && temperatura > limites.frio) {
+            classe_temperatura = 'cor-alerta ideal';
+            console.log("caiu no 3")
+        }
+        else if (temperatura <= limites.frio && temperatura > limites.muito_frio) {
+            classe_temperatura = 'cor-alerta alerta-frio';
+            console.log("caiu no 4")
+        }
+        else if (temperatura < limites.min_temperatura) {
+            classe_temperatura = 'cor-alerta perigo-frio';
+            console.log("caiu no 5")
+        }
+
+        var card;
+
+        if (idestufa == 1) {
+            temp_aquario_1.innerHTML = temperatura + "°C";
+            card = card_1
+        } else if (idestufa == 2) {
+            temp_aquario_2.innerHTML = temperatura + "°C";
+            card = card_2
+        } else if (idestufa == 3) {
+            temp_aquario_3.innerHTML = temperatura + "°C";
+            card = card_3
+        } else if (idestufa == 4) {
+            temp_aquario_4.innerHTML = temperatura + "°C";
+            card = card_4
+        }
+
+        // alterando
+        card.className = classe_temperatura;
+
+    }
+
+</script>
+
+</html>
+<script>
+    var btn = document.querySelector('#btn');
+    var sidebar = document.querySelector('.sidebar');
+    var searchbtn = document.querySelector('.bx-search');
+
+btn.onclick = function(){
+    sidebar.classList.toggle('active');
+}
+searchbtn.onclick = function(){
+    sidebar.classList.toggle('active');
+}
+
+function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "../login.html";
+}
+
+function validarSessao() {
+    
+
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+    var nomeFunc = sessionStorage.NOMEFUNC_USUARIO;
+
+    var h1LoginUsuario = document.getElementById("h1_login_usuario");
+
+    if (email != null && nome != null) {
+        window.alert(`Seja bem-vindo, ${nome}!`);
+        if (h1LoginUsuario != undefined) {
+            h1LoginUsuario.innerHTML = email;
+        }
+        nome_usuario.innerHTML = nome;
+        nome_funcionario.innerHTML = nomeFunc;
+        
+    } else {
+        window.location = "../login.html";
+    }
+}
+</script>

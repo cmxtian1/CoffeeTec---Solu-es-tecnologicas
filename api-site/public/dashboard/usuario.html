@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/usuario.css">
+    <link rel="icon" href="../assets/img/icon.png">
+    <title>Cadastro de funcionário</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body onload="validarSessao()">
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bxl-codepen'></i>
+                <div class="logo_name">CoffeeTec</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Pesquisa">
+                </a>
+                <span class="tooltip">Pesquisa</span>
+            </li>
+            <li>
+                <a href="usuario.html">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Funcionários</span>
+                </a>
+                <span class="tooltip">Funcionários</span>
+            </li>
+            <li>
+                <a href="./api-sensor-dht1/graficos.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="./cards.html">
+                    <i class='bx bx-analyse'></i>
+                    <span class="links_name">Analytics</span>
+                </a>
+                <span class="tooltip">Analytics</span>
+            </li>
+            <li>
+                <a href="https://helpcoffeetec.freshdesk.com">
+                    <i class='bx bx-notification'></i>
+                    <span class="links_name">Suporte</span>
+                </a>
+                <span class="tooltip">Suporte</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Configurações</span>
+                </a>
+                <span class="tooltip">Configurações</span>
+            </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="../img/icon_usuario.png" alt="">
+                    <div class="name_job">
+                        <div class="name" id="nome_usuario">Lucas Mastelini</div>
+                        <div class="job" id="nome_funcionario">DEV</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out" onclick="limparSessao()"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="home_content">
+        <div class="text">
+            <h1>Cadastrar funcionário</h1>
+        </div>
+        <div class='cadastro'>
+            <div class='container'>
+                <div class='card_medio'>
+                    <div class='entrada'>
+                        Nome: <br>
+                        <input id='in_nome' type="text" autofocus>
+                    </div>
+                    <div class='entrada'>
+                        Email: <br>
+                        <input id='in_email' type="text">
+                    </div>
+                    <div class='entrada'>
+                        Senha: <br>
+                        <input id='in_senha' type="password">
+                    </div>
+                    <button onclick='cadastrar_func()' class='btn'>
+                        Cadastrar
+                    </button>
+                </div>
+                <div id="div_aguardar" class="loading-div">
+
+                </div>
+
+                <div id="div_erros_login">
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
+<script>
+    var btn = document.querySelector('#btn');
+    var sidebar = document.querySelector('.sidebar');
+    var searchbtn = document.querySelector('.bx-search');
+
+    btn.onclick = function () {
+        sidebar.classList.toggle('active');
+    }
+    searchbtn.onclick = function () {
+        sidebar.classList.toggle('active');
+    }
+
+
+    var idempresa = sessionStorage.ID_USUARIO;
+    function cadastrar_func() {
+
+        var emailFunc = in_email.value;
+        var senhaFunc = in_senha.value;
+        var nomeFunc = in_nome.value;
+
+
+        if (nomeFunc == '' || emailFunc == '' || senhaFunc == '') {
+            alert('Preencha todos os campos')
+        }
+        if (senhaFunc.length < 8) {
+            alert('A senha deve ter no minimo 8 caracteres')
+        } else {
+
+
+
+
+
+            if (emailFunc.indexOf('@') && emailFunc.indexOf('.com') == -1) {
+                window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+                alert('Insira um email válido')
+            }
+
+
+            fetch("/usuarios/cadastrar_func", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nomeFunc,
+                    idempresa: idempresa,
+
+                })
+            }).then(function (resposta) {
+                console.log("resposta:", resposta);
+
+                resposta.json().then(function (respostaFormatada) {
+                    console.log(respostaFormatada);
+                    console.log(respostaFormatada.insertId);
+
+                    fetch("/usuarios/func_login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email: emailFunc,
+                            senha: senhaFunc,
+                            idfunc: respostaFormatada.insertId,
+                            idempresa: idempresa,
+                        })
+                    });
+                });
+
+
+
+
+
+
+                if (resposta.ok) {
+                    window.alert("Cadastro realizado com sucesso!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+        }
+    }
+
+</script>
+<script>
+    function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "../login.html";
+}
+
+function validarSessao() {
+    
+
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+    var nomeFunc = sessionStorage.NOMEFUNC_USUARIO;
+
+    var h1LoginUsuario = document.getElementById("h1_login_usuario");
+
+    if (email != null && nome != null) {
+        window.alert(`Seja bem-vindo, ${nome}!`);
+        if (h1LoginUsuario != undefined) {
+            h1LoginUsuario.innerHTML = email;
+        }
+        nome_usuario.innerHTML = nome;
+        nome_funcionario.innerHTML = nomeFunc;
+        
+    } else {
+        window.location = "../login.html";
+    }
+}
+</script>

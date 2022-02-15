@@ -1,0 +1,79 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2','Segoe UI', Tahoma, Geneva;
+    background-color: #392620;
+}
+.header{
+    border-bottom: 3px solid #E3b062;
+    color: #E3b062;
+}
+.container{
+    display: flex;
+    width:80%;
+    margin: auto;
+    justify-content:space-between;
+}
+.navbar{
+    list-style: none;
+    display:flex;
+    width: 600px;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #E3b062
+}
+.navbar a{
+    color: #E3b062;
+    text-decoration: none;
+}
+.agora{
+    font-weight: 800;
+}
+.banner{
+    height:720px;
+    color:#fff;
+    background-image: url("https://villacafe.com.br/blog/wp-content/uploads/2017/11/136690-estender-1000-palavras-qual-e-a-diferenca-entre-o-cafe-gourmet-e-o-cafe-tradicional-760x460.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.banner .container{
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner .login{
+    background-color: rgb(229, 229, 229, 0.8) ;
+    color: #9b111e;
+    height: 620px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+}
+
+.banner h2{
+    font-size: 45px;
+}
+
+
+.footer{
+    background-color:#392620;
+    height: 150px;
+    color:white;
+    display: flex;
+    justify-content: center;
+    border-top: #E3b062 solid 3px;
+}
+
+.footer .container{
+    justify-content: center;
+}
+
+h4{
+    margin:0;
+    padding:0;
+}

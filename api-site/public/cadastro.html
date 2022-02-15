@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CoffeeTec | Cadastro</title>
+
+
+    <script src="./js/funcoes.js"></script>
+
+
+    <link rel="icon" href="./assets/img/icon.png">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!--Cabeçalho-->
+    <div class="header">
+        <div class="container">
+            <h1>CoffeeTec</h1>
+            <ul class="navbar">
+                <li class="agora">
+                    <a href="index.html">Inicial</a>
+                </li>
+                <li>
+                    <a href="simulador_fina.html">Simulador</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--Imagem/banner-->
+    <div class="banner">
+        <div class="container">
+            <div class="login">
+                <h2>Cadastre sua empresa</h2>
+                <div class="boxes">
+                    <div id="parte1">
+                        <div id="empresa">Empresa</div>
+                        <input id="in_empresa" autofocus>
+
+                        <div id="cnpj">CNPJ</div>
+                        <input onkeyup='valida_cnpj()' id="in_cnpj">
+
+                        <div id="representante">Representante</div>
+                        <input id="in_representante">
+                    </div>
+                    <div id="parte2">
+                        <div id="telefone">Telefone</div>
+                        <input id="in_tel">
+
+                        <div id="email">Email</div>
+                        <input id="in_email">
+
+                        <div id="senha">Senha</div>
+                        <input type="password" id="in_senha">
+                    </div>
+                </div>
+                <div class='btn'>
+                    <button onclick="cadastrar()" id="botao">
+                        Cadastrar
+
+                    </button>
+                </div>
+            </div>
+
+            <div id="div_aguardar" class="loading-div">
+
+            </div>
+
+            <div id="div_erros_login">
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="footer">
+        <div class="container">
+            <h4>Developed by BandTec students &copy; 2021</h4>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    function valida_cnpj() {
+        var cnpj = in_cnpj.value;
+        if (cnpj.length == 14) {
+            in_cnpj.style.color = 'green';
+        } else {
+            in_cnpj.style.color = 'red';
+        }
+    }
+
+
+    function cadastrar() {
+        aguardar()
+        var emailVar = in_email.value;
+        var senhaVar = in_senha.value;
+        var telefoneVar = in_tel.value;
+        var representanteVar = in_representante.value;
+        var cnpjVar = in_cnpj.value;
+        var empresaVar = in_empresa.value;
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (emailVar == "" || senhaVar == "") {
+
+            if (emailVar == "") {
+                console.log('email está em branco')
+            }
+            if (senhaVar == "") {
+                console.log('senha está em branco')
+            }
+            if (telefoneVar == "") {
+                console.log('telefone está em branco')
+            }
+            if (representanteVar == "") {
+                console.log('representante está em branco')
+            }
+            if (cnpjVar == "") {
+                console.log('cnpj está em branco')
+            }
+            if (empresaVar == "") {
+                console.log('empresa está em branco')
+            }
+
+            finalizarAguardar();
+            return false;
+        }
+
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: emailVar,
+                cnpj: cnpjVar,
+                empresa: empresaVar,
+                representante: representanteVar,
+                telefone: telefoneVar,
+                senha: senhaVar,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta:", resposta);
+
+            resposta.json().then(function (respostaFormatada) {
+                // console.log(respostaFormatada);
+                // console.log(respostaFormatada.insertId);
+
+                fetch("/usuarios/empresa_login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: emailVar,
+                senha: senhaVar,
+                idempresa: respostaFormatada.insertId,
+            }) 
+            }); 
+        });
+
+            if (resposta.ok) {
+                window.alert("Cadastro realizado com sucesso!");
+                window.location = "confirmacao.html";
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+    }
+</script>

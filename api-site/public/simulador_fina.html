@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador financeiro</title>
+    <link rel="stylesheet" href="./css/simulador.css" />
+    <link rel="icon" href="./assets/img/icon.png" />
+  </head>
+  <body>
+    <!--Cabeçalho-->
+    <div class="header">
+      <div class="container">
+        <h1>CoffeeTec</h1>
+        <ul class="navbar">
+          <li class="agora">
+            <a href="index.html">Inicial</a>
+          </li>
+          <li>
+            <a href="simulador_fina.html">Simulador</a>
+          </li>
+          <li>|</li>
+          <li>
+            <a href="login.html">Login</a>
+          </li>
+          <li>
+            <a href="cadastro.html">Cadastro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="banner">
+      <div class="container">
+        <div class="entrada">
+          <h1>Simule nosso sistema para sua produção:</h1>
+          <span class="dados">
+            Média de café produzido por safra:
+            <input
+              onkeyup="calculo()"
+              id="producao_safra"
+              placeholder="sacas"
+            />
+            <br /><br />
+            Valor comercializado por saca:
+            <input
+              onkeyup="calculo"
+              id="saca_comercializada"
+              placeholder="R$"
+            />
+            <br /><br />
+            Porcentagem de perdas por safra:
+            <input onkeyup="calculo()" id="perdas_safra" placeholder="%" />
+            <br /><br />
+          </span>
+        </div>
+
+        <div id="resultado">
+          <div class="result">
+            <span>
+              A média de café produzidos por safra atualmente é de
+              <span id="qtd_safra">0</span> sacas. <br /><br />
+              A porcentagem de perdas atual é de
+              <span id="porcentagem_perdas">0</span>% e com a implantação do
+              nosso sistema tornará a ser no máximo
+              <span id="porcentagem_minima">0</span>%
+              <br />
+              Ou seja, <span id="antigo">0</span> sacas serão aproveidas,
+              rendendo um lucro de aproximadamente R$<span
+                id="lucro_aproveitamento"
+                >0</span
+              >
+              <br /><br />
+              Com o nosso sistema, a qualidade do grão melhorará e o novo valor
+              de mercado poderá ser R$<span id="valorizacao">0</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <h4>Developed by BandTec students &copy; 2021</h4>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  function calculo() {
+    var producao = Number(producao_safra.value);
+    var perda = Number(perdas_safra.value);
+    var comerc = Number(saca_comercializada.value);
+    var eficacia = perda * 0.45;
+    var perda_antiga = producao * perda * 0.01;
+    var perda_nova = producao * eficacia * 0.01;
+    var aproveitamento = (perda_antiga - perda_nova).toFixed(2);
+    var lucro = (comerc * aproveitamento).toFixed(2);
+
+    qtd_safra.innerHTML = producao;
+    porcentagem_perdas.innerHTML = perda;
+    porcentagem_minima.innerHTML = eficacia;
+    antigo.innerHTML = aproveitamento;
+    lucro_aproveitamento.innerHTML = lucro;
+    valorizacao.innerHTML = comerc * 0.035 + comerc;
+  }
+</script>

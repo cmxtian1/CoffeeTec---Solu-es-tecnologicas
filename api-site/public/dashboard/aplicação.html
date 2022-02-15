@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./Dashboard.css">
+    <link rel="icon" href="../assets/img/icon.png">
+    <title>Home</title>
+</head>
+<body onload="validarSessao()">
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bxl-codepen'></i>
+                <div class="logo_name">CoffeeTec</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Pesquisa">
+                </a>
+                <span class="tooltip">Pesquisa</span>
+            </li>
+            <li>
+                <a href="./usuario.html">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Funcionários</span>
+                </a>
+                <span class="tooltip">Funcionários</span>
+            </li>
+            <li>
+                <a href="./api-sensor-dht1/graficos.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="./cards.html">
+                    <i class='bx bx-analyse' ></i>
+                    <span class="links_name">Analytics</span>
+                </a>
+                <span class="tooltip">Analytics</span>
+            </li>
+            <li>
+                <a href="https://helpcoffeetec.freshdesk.com">
+                    <i class='bx bx-notification' ></i>
+                    <span class="links_name">Suporte</span>
+                </a>
+                <span class="tooltip">Suporte</span>
+            </li>
+            <li>
+            <a href="">
+                <i class='bx bx-cog'></i>
+                <span class="links_name">Configurações</span>
+            </a>
+            <span class="tooltip">Configurações</span>
+        </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="../img/icon_usuario.png" alt="">
+                    <div class="name_job">
+                        <div class="name" id="nome_usuario">Lucas Mastelini</div>
+                        <div class="job" id="nome_funcinario">DEV</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out" onclick="limparSessao()"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="home_content">
+        <div class="text">
+           <h1>Bem vindo ao CoffeeTec Solution!</h1>
+        </div>
+    </div>
+    <div class='boxImg'>
+        <div class='cardBox'>
+            <img src="../img/mapa_00299-pfixtw7qfs9r8fhppw007bpix1zp5uxjtvnzs4bf9w.png" alt="">
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var btn = document.querySelector('#btn');
+    var sidebar = document.querySelector('.sidebar');
+    var searchbtn = document.querySelector('.bx-search');
+
+    btn.onclick = function(){
+        sidebar.classList.toggle('active');
+    }
+    searchbtn.onclick = function(){
+        sidebar.classList.toggle('active');
+    }
+</script>
+
+<script>
+
+function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "../login.html";
+}
+
+function validarSessao() {
+    
+
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+    var nomeFunc = sessionStorage.NOMEFUNC_USUARIO;
+
+    var h1LoginUsuario = document.getElementById("h1_login_usuario");
+
+    if (email != null && nome != null) {
+        window.alert(`Seja bem-vindo, ${nome}!`);
+        if (h1LoginUsuario != undefined) {
+            h1LoginUsuario.innerHTML = email;
+        }
+        nome_usuario.innerHTML = nome;
+        nome_funcionario.innerHTML = nomeFunc;
+        
+    } else {
+        window.location = "../login.html";
+    }
+}
+</script>
+
+
+

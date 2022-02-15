@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2','Segoe UI', Tahoma, Geneva;
+    background-color: #392620;
+}
+.header{
+    border-bottom: 3px solid #E3b062;
+    color: #E3b062;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    width:80%;
+    margin: auto;
+    justify-content:space-between;
+}
+.navbar{
+    list-style: none;
+    display:flex;
+    width: 600px;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #E3b062;
+    margin-left: 500px;
+}
+.navbar a{
+    color: #E3b062;
+    text-decoration: none;
+}
+.agora{
+    font-weight: 800;
+}
+
+.banner{
+    height:810px;
+    color:#fff;
+}
+.banner .container{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height: 100%;
+}
+
+.entrada{
+    color: white;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    border:#E3b062 solid 2px;
+    font-size: 20px;
+}
+.dados{
+    font-size: 30px;
+}
+.entrada h1{
+    font-size: 40px;
+}
+#resultado{
+    background-color: #E3b062;
+    color: white;
+    font-size: 25px;  
+    display: flex;
+    align-items: center;
+}
+.result{
+    padding: 30px;
+}
+.footer{
+    background-color:#392620;
+    height: 70px;
+    color:white;
+    display: flex;
+    justify-content: center;
+    border-top: #E3b062 solid 3px;
+}
+
+.footer .container{
+    justify-content: center;
+}
+
+h4{
+    margin:0;
+    padding:0;
+}

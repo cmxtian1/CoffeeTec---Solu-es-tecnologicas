@@ -1,0 +1,190 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Exo 2', 'Segoe UI', Tahoma, Geneva;
+  background-color: #392620;
+  background-image: url('https://villacafe.com.br/blog/wp-content/uploads/2017/11/136690-estender-1000-palavras-qual-e-a-diferenca-entre-o-cafe-gourmet-e-o-cafe-tradicional-760x460.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment:fixed;
+}
+.header {
+  background-color: #392620;
+  border-bottom: 3px solid #e3b062;
+  color: #e3b062;
+}
+.container {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-between;
+}
+.navbar {
+  list-style: none;
+  display: flex;
+  width: 600px;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #e3b062;
+}
+.navbar a {
+  color: #e3b062;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.banner {
+  height: 600px;
+  color: #fff;
+  
+}
+.banner .container {
+  height: 100%;
+  align-items: center;
+}
+.banner p {
+  width: 10px;
+  margin: 0;
+  padding: 0;
+  font-size: 36px;
+  margin-left: 350px;
+  font-weight: 700;
+}
+.social {
+  background-color: #392620;
+  padding: 50px 0;
+  border-top: #e3b062 3px solid;
+}
+.social .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.social .titulo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.social h2 {
+  display: flex;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  align-self: center;
+  justify-content: center;
+  color: #9b111e;
+  margin: 0;
+}
+.social .boxes {
+  display: flex;
+}
+.social .box {
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 33%;
+  color: white;
+}
+.social .box img {
+  width: 150px;
+  align-self: center;
+}
+.social .boxv {
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 33%;
+  color: white;
+}
+.social .boxv img {
+  width: 190px;
+  align-self: center;
+}
+.social .box h4 {
+  color: white;
+  margin-top: 30px;
+  font-size: 20px;
+}
+.social .boxv h4 {
+  color: white;
+  font-size: 20px;
+}
+.empresa {
+  background-color: #e3b062;
+  border-top: #9b111e 3px solid;
+  border-bottom: #9b111e 3px solid;
+  height: 580px;
+}
+.empresa .title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.empresa h2 {
+  display: flex;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  align-self: center;
+  justify-content: center;
+  color: #9b111e;
+  margin: 0;
+  margin-top: 50px;
+}
+.empresa .ilustrar img {
+  height: 350px;
+  float: left;
+  margin-left: 100px;
+  margin-top: 61px;
+}
+.empresa .text {
+  display: flex;
+  padding: 20px;
+  -webkit-text-stroke-width: 0.2px; /* largura da borda */
+  -webkit-text-stroke-color: #fff; /* cor da borda */
+  color: #9b111e;
+  font-size: 25px;
+}
+.footer {
+  background-color: #392620;
+  height: 480px;
+  color: white;
+}
+.footer .container {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+}
+.divisor {
+  display: flex;
+  align-items: center;
+}
+.footer .divisor img {
+  height: 200px;
+}
+
+.footer .endereco {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.footer .endereco img {
+  height: 300px;
+  margin-top: 10px;
+}
+.contato {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

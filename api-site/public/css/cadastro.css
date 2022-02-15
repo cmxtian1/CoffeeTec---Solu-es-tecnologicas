@@ -1,0 +1,233 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Exo 2', 'Segoe UI', Tahoma, Geneva;
+  background-color: #392620;
+}
+.header {
+  border-bottom: 3px solid #e3b062;
+  color: #e3b062;
+}
+.container {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-between;
+}
+.navbar {
+  list-style: none;
+  display: flex;
+  width: 600px;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #e3b062;
+}
+.navbar a {
+  color: #e3b062;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.banner {
+  height: 720px;
+  color: #fff;
+  background-image: url('https://villacafe.com.br/blog/wp-content/uploads/2017/11/136690-estender-1000-palavras-qual-e-a-diferenca-entre-o-cafe-gourmet-e-o-cafe-tradicional-760x460.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.banner .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner .login {
+  background-color: rgb(229, 229, 229, 0.8);
+  color: #9b111e;
+  height: 620px;
+  width: 70%;
+  justify-content: center;
+  border-radius: 20px;
+}
+.footer {
+  background-color: #392620;
+  height: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  border-top: #e3b062 solid 3px;
+}
+.footer .container {
+  justify-content: center;
+}
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.banner h2 {
+  font-size: 45px;
+  display: flex;
+  justify-content: center;
+}
+.email {
+  font-size: 25px;
+  margin-top: 40px;
+  font-weight: 700;
+  margin-left: 260px;
+}
+.boxes {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#parte1 {
+  float: left;
+  margin-top: 10px;
+}
+#parte2 {
+  float: right;
+
+  margin-top: 10px;
+}
+#empresa {
+  font-size: 30px;
+  font-weight: 500;
+  margin-left: 95px;
+}
+#cnpj {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: 500;
+  margin-left: 120px;
+}
+#representante {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: 500;
+  margin-left: 60px;
+}
+#telefone {
+  font-size: 30px;
+  font-weight: 500;
+  margin-left: 100px;
+}
+#email {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: 500;
+  margin-left: 120px;
+}
+#senha {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: 500;
+  margin-left: 120px;
+}
+#in_empresa {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid #e3b062;
+  font-size: 20px;
+}
+#in_cnpj {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid #e3b062;
+  font-size: 20px;
+}
+#in_representante {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid #e3b062;
+  font-size: 20px;
+}
+#in_tel {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid #e3b062;
+  font-size: 20px;
+}
+#in_email {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid #e3b062;
+  font-size: 20px;
+  color: black;
+}
+#in_senha {
+  height: 40px;
+  width: 300px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid #e3b062;
+  font-size: 20px;
+}
+
+#botao {
+  margin-top: 70px;
+  height: 55px;
+  width: 26%;
+  color: #fff;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #9b111e;
+  border: #9b111e solid;
+  font-size: 30px;
+  transition: all 1s ease;
+}
+
+#botao:hover {
+  margin-top: 70px;
+  height: 55px;
+  width: 35%;
+  color: #9b111e;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #fff;
+  border: #9b111e solid;
+  font-size: 30px;
+  transition: all 1s ease;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+}
+#register {
+  height: 45px;
+  width: 30%;
+  border-radius: 10px 10px 10px 10px;
+  border: #9b111e solid;
+  color: #9b111e;
+  background-color: #fff;
+
+  font-size: 20px;
+}
+
+.footer {
+  background-color: #392620;
+  height: 150px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  border-top: #e3b062 solid 3px;
+}
+
+.footer .container {
+  justify-content: center;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
